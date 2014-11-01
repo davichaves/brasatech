@@ -16,13 +16,11 @@
   <div id="main">
     <h1>You're ready to use Parse!</h1>
 
-    <p>Read the documentation and start building your JavaScript app:</p>
-
-    <form name="myForm" action="POST" onsubmit="return validateForm()" method="post">
+    <form name="myForm" onsubmit="return validateForm()" method="post" action="javascript:formSubmit()">
     Nome: <input type="text" name="fname"><br/>
     e-mail: <input type="text" name="femail"><br/>
-    senha: <input type="password" name="pwd" name="fsenha"><br/>
-    confirme sua senha: <input type="password" name="pwd" name="fcsenha"><br/>   
+    senha: <input type="password" name="fsenha"><br/>
+    confirme sua senha: <input type="password" name="fcsenha"><br/>   
     <input type="submit" value="Submit">
     </form>
 
@@ -32,6 +30,7 @@
     Parse.initialize("I7u029kaDmyXHXjPYJGULbPn3gGkO9cjlWi2NQFV", "N3KhqPGtEplwWpAWeDLjd8DAPRWSeiu7GTGVexLY");
     
     function validateForm() {
+      alert("chamou isso!22e2s2");
       var name = document.forms["myForm"]["fname"].value;
       if (name==null || name=="") {
         alert("Nome não pode estar em branco");
@@ -55,14 +54,25 @@
       if (csenha != senha) {
         alert("Senhas digitadas nao são iguais.");
         return false;
-      };
-      var user = new Parse.User();
-      user.set("nome", name);
-      user.set("email", email);
-      user.set("senha", senha);
+      }
+    }
+
+    function formSubmit() {
+      alert("chamou essa mensagem!");
+      var newUser = new Parse.User();
+      var name = document.forms["myForm"]["fname"].value;
+      newUser.set("username", name);
+      var senha = document.forms["myForm"]["fsenha"].value;
+      newUser.set("password", senha);
+      var email = document.forms["myForm"]["femail"].value;
+      newUser.set("email", email);
         
-      user.signUp(null, {
+      // other fields can be set just like with Parse.Object
+      newUser.set("phone", "650-555-0000");
+        
+      newUser.signUp(null, {
         success: function(user) {
+          alert("Deu certo!!!")
           // Hooray! Let them use the app now.
         },
         error: function(user, error) {
@@ -71,6 +81,7 @@
         }
       });
     }
+
     // var TestObject = Parse.Object.extend("TestObject");
     // var testObject = new TestObject();
     //   testObject.save({foo: "bar"}, {
@@ -82,6 +93,7 @@
     //   }
     // });
 
+    //testing!
     //testing!
   </script>
 </body>
