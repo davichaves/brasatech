@@ -18,7 +18,7 @@
 
     <p>Read the documentation and start building your JavaScript app:</p>
 
-    <form name="myForm" action="demo_form.asp" onsubmit="return validateForm()" method="post">
+    <form name="myForm" action="POST" onsubmit="return validateForm()" method="post">
     Nome: <input type="text" name="fname"><br/>
     e-mail: <input type="text" name="femail"><br/>
     senha: <input type="password" name="pwd" name="fsenha"><br/>
@@ -56,7 +56,20 @@
         alert("Senhas digitadas nao são iguais.");
         return false;
       };
-
+      var user = new Parse.User();
+      user.set("nome", name);
+      user.set("email", email);
+      user.set("senha", senha);
+        
+      user.signUp(null, {
+        success: function(user) {
+          // Hooray! Let them use the app now.
+        },
+        error: function(user, error) {
+          // Show the error message somewhere and let the user try again.
+          alert("Error: " + error.code + " " + error.message);
+        }
+      });
     }
     // var TestObject = Parse.Object.extend("TestObject");
     // var testObject = new TestObject();
@@ -70,23 +83,6 @@
     // });
 
     //testing!
-    // var user = new Parse.User();
-    // user.set("username", "my name");
-    // user.set("password", "my pass");
-    // user.set("email", "email@example.com");
-      
-    // // other fields can be set just like with Parse.Object
-    // user.set("phone", "650-555-0000");
-      
-    // user.signUp(null, {
-    //   success: function(user) {
-    //     // Hooray! Let them use the app now.
-    //   },
-    //   error: function(user, error) {
-    //     // Show the error message somewhere and let the user try again.
-    //     alert("Error: " + error.code + " " + error.message);
-    //   }
-    // });
   </script>
 </body>
 
