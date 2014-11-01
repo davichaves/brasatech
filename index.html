@@ -14,8 +14,8 @@
 <body>
   
   <div id="main">
-    <h1>You're ready to use Parse!</h1>
-
+    <center><h1>TESTR</h1></center>
+    <h3>Registre-se</h3>
     <form name="myForm" onsubmit="return validateForm()" method="post" action="javascript:formSubmit()">
     Nome: <input type="text" name="fname"><br/>
     e-mail: <input type="text" name="femail"><br/>
@@ -23,7 +23,12 @@
     confirme sua senha: <input type="password" name="fcsenha"><br/>   
     <input type="submit" value="Submit">
     </form>
-
+    <h3>Log In:</h3>
+    <form name="myLogInForm" onsubmit="return validateLogInForm()" method="post" action="">
+    e-mail: <input type="text" name="floginemail"><br/>
+    senha: <input type="password" name="floginsenha"><br/>  
+    <input type="submit" value="Submit">
+    </form>
   </div>
 
   <script type="text/javascript">
@@ -73,6 +78,7 @@
       newUser.signUp(null, {
         success: function(user) {
           alert("Deu certo!!!")
+          window.location = "LoggedIn.html";
           // Hooray! Let them use the app now.
         },
         error: function(user, error) {
@@ -80,6 +86,20 @@
           alert("Error: " + error.code + " " + error.message);
         }
       });
+    }
+
+    function validateLogInForm() {
+      alert("chamou essa porra aqui!!!!");
+      var email = document.forms["myForm"]["floginemail"].value;
+      if (email==null || email=="") {
+        alert("E-mail não pode estar em branco");
+        return false;
+      }
+      var senha = document.forms["myForm"]["floginsenha"].value;
+      if (senha==null || senha=="") {
+        alert("Por favor, insira uma senha");
+        return false;
+      }
     }
 
     // var TestObject = Parse.Object.extend("TestObject");
